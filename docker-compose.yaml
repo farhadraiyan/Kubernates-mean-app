@@ -3,52 +3,10 @@ services:
     app:
         container_name: docker-node-mongo
         restart: always
-        build:
-            context: .
-            dockerfile: Dockerfile
-        # environment:
-        #     - MONGO_URI=mongodb://mongo:27017/videoLibrary
-        # env_file: 
-        #     - ./node.env
-        volumes: 
-            - "./:/usr/src/app/node-server"
-            - "/usr/src/app/node-server/node_modules"
-        ports:
-            - '3000:3000'
         links: 
             - mongo
     angular:
         container_name: angular-client
-        build: 
-            context: ./MEANSTACKVIDEOSLIB
-            dockerfile: Dockerfile
-        volumes: 
-            - "./MEANSTACKVIDEOSLIB:/usr/src/app/ng-client"
-            - "/usr/src/app/ng-client/node_modules"
-        ports: 
-            - "7202:4200"
     mongo:
         container_name: mongo
         image: mongo
-        # env_file: 
-        #     - ./node.env
-        volumes:
-            # - "/home/farhad/Desktop/docker-projects/docker-meanstack/data:/data/db"
-            - type: volume
-              source: mongodb_mean
-              target: /data/db
-            # - type: volume
-            #   source: mongodb-videolib
-            #   target: /data/db
-            # #   volume: 
-            # #     nocopy: true
-            # - type: bind
-            #   source: ./
-            #   target: /data/db
-        # restart: always
-        ports: 
-            - '27017:27017'
-volumes:
-    mongodb_mean:
-        # external: 
-        #     name: mongodb_mean

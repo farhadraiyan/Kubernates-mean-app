@@ -1,0 +1,20 @@
+version: "3.2"
+services:
+    app:
+        #for production use the remote image registry insted of local current dir
+        build:
+            context: .
+            dockerfile: Dockerfile
+        ports:
+            - '3000:3000'
+        environment: 
+            PRODUCTION: 'true'
+    angular:
+        build: 
+            context: ./MEANSTACKVIDEOSLIB
+            dockerfile: Dockerfile
+        ports: 
+            - "4200:4200"
+    mongo:
+        ports: 
+            - '27017:27017'
